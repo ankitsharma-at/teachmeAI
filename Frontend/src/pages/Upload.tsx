@@ -34,11 +34,7 @@ function Upload() {
             What you'll get:
           </h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            <Feature
-              icon={<FileText className="h-6 w-6 text-indigo-600" />}
-              title="Text Extraction"
-              description="Automatic extraction of text content from your PDF"
-            />
+           
             <Feature
               icon={<MessageSquare className="h-6 w-6 text-indigo-600" />}
               title="AI Chat"
@@ -48,6 +44,11 @@ function Upload() {
               icon={<Brain className="h-6 w-6 text-indigo-600" />}
               title="Smart Quizzes"
               description="Generate personalized quizzes to test your knowledge"
+            /> 
+            <Feature
+              icon={<FileText className="h-6 w-6 text-indigo-600" />}
+              title="Smart Evaluation"
+              description="evaluation of quiz with AI explaining Weak Areas "
             />
           </div>
         </div>

@@ -65,14 +65,14 @@ router.post('/quiz', async (req, res, next) => {
 
   router.post('/quiz/submit', async (req, res, next) => {
     try {
-      const { quiz1 , answer , content} = req.body;
+      const { quiz1 , answer , content , score} = req.body;
       
       if (!quiz1 && !answer) {
         throw new AppError('quiz', 400);
       }
   
-      const response = await submitQuiz(quiz1, answer , content);
-      console.log(quiz1, answer)
+      const response = await submitQuiz(quiz1, answer , content,score);
+      console.log(quiz1, answer,score)
       res.json({
         status: 'success',
         response 

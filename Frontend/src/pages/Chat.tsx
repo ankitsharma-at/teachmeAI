@@ -1,9 +1,10 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, memo, useCallback } from 'react';
 import MarkdownRenderer from '../components/MarkdownRenderer';
 import { Send, Bot } from 'lucide-react';
 import { motion } from 'framer-motion';
 import { useChat } from '../hooks/useChat';
 import { ChatSummary } from '../components/ChatSummary';
+import { Summary } from '../types';
 
 function Chat() {
   const { messages, summary, isLoading, error, sendMessage, generateSummary } = useChat();
@@ -35,7 +36,19 @@ function Chat() {
     setSearchInput('');
      // Switch back to Chat tab
   };
-
+  const Summary = useCallback(():any=>{
+    return (   <motion.div
+            initial={{ opacity: 0, x: 20 }}
+            animate={{ opacity: 1, x: 0 }}
+            className="lg:col-span-4 h-auto mb-12"
+          >
+            <ChatSummary
+              summary={summary}
+              isLoading={isLoading}
+              onGenerate={generateSummary}
+            />
+          </motion.div>)
+  },[summary])
   return (
     <div className="max-w-6xl mx-auto px-4 py-8">
       {/* Tabs */}
@@ -62,17 +75,7 @@ function Chat() {
       <div className="grid grid-cols-1 lg:grid-cols-4 gap-8">
         {/* Tab Content */}
         {activeTab === 'summary' ? (
-          <motion.div
-            initial={{ opacity: 0, x: 20 }}
-            animate={{ opacity: 1, x: 0 }}
-            className="lg:col-span-4 h-auto mb-12"
-          >
-            <ChatSummary
-              summary={summary}
-              isLoading={isLoading}
-              onGenerate={generateSummary}
-            />
-          </motion.div>
+       <Summary/>
         ) : (
           <motion.div
             initial={{ opacity: 0, y: 20 }}

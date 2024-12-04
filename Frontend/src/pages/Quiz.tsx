@@ -21,19 +21,21 @@ const Quiz: React.FC = () => {
   const [showResults, setShowResults] = useState(false);
   const [loading, setLoading] = useState(true); // Add loading state
   const [error, setError] = useState<string | null>(null); // Add error state
-if(!pdfText){
-  alert('no pdf uploaded')
-  navigate('/')
-}
-  
+
+   
   useEffect(() => {
+  
     const fetchQuiz = async () => {
-      try {
+      try { 
+        if(!pdfText){
+          navigate('/')
+          alert("no pdf uploaded")
+         }else{
         const response = await quizService.generateQuiz(pdfText);
         setQuestions(response); 
         setQuiz(response);
         setLoading(false); 
-      } catch (err) {
+      }} catch (err) {
         setError("Failed to load quiz. Please try again.");
         setLoading(false);
       }

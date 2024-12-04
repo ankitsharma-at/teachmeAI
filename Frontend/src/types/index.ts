@@ -6,11 +6,8 @@ export interface Message {
 }
 
 export interface Summary {
-  summary:string;
-  data :string;
-  mainpoints :string;
-  keyTakeaways :string;
-  additionalText: string;
+  summary:any;
+
 }
 
 export interface ChatState {

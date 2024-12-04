@@ -1,6 +1,6 @@
 
 import { Summary } from '../types';
-import { FileText, BookOpen, Lightbulb, LucideLightbulb } from 'lucide-react';
+import { FileText, LucideLightbulb } from 'lucide-react';
 import MarkdownRenderer from './MarkdownRenderer';
 
 interface ChatSummaryProps {

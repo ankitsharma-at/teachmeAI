@@ -1,4 +1,4 @@
-import React, { useEffect , useState } from 'react';
+import { useEffect , useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Trophy, ArrowLeft, Share2 } from 'lucide-react';
 import { usePdf } from '../context/PdfContext';
@@ -15,7 +15,7 @@ function Scorecard() {
   
   useEffect(()=>{
      async function resultQuiz(){
-    result =await quizService.submitQuiz(quiz , ansArr ,pdfText)
+    result =await quizService.submitQuiz(quiz , ansArr ,pdfText , finalScore)
     console.log(result)
     setResponse(result)
     

@@ -29,12 +29,12 @@ async function generateQuiz(content, questionCount) {
     throw new AppError("Failed to generate quiz", error, 500);
   }
 }
-async function submitQuiz(quiz , answers , content){
+async function submitQuiz(quiz , answers , content ,score){
   try {
     console.log("Content:", quiz);
 
     // Create the prompt
-    const prompt = `${SYSTEM_PROMPTS.QUIZ_SUBMIT}\n\n from the content${content} the  ${quiz} was taken. answers given by user:\n${answers}`;
+    const prompt = `${SYSTEM_PROMPTS.QUIZ_SUBMIT}\n\n from the content: ${content} the  ${quiz} was taken.here are answers given by users :\n${answers} and their score was${score} `;
     console.log("Prompt:", prompt);
 
     // Generate content from the model

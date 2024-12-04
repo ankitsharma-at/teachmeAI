@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { Message } from '../types';
 
-const API_BASE_URL = 'http://localhost:3000/api';
+const API_BASE_URL = import.meta.env.VITE_API_URL ;
 
 const api = axios.create({
   baseURL: API_BASE_URL,
@@ -11,7 +11,7 @@ const api = axios.create({
 });
 
 export const chatService = {
-  async sendMessage(content: string,pdfText: string, context: Message[]) {
+  async sendMessage(content: string,pdfText: string, context: Message[], ) {
     // console.log(context)
     // console.log(content)
     const response = await api.post('/chat', { question:content, context,pdfText });
@@ -34,8 +34,8 @@ export const quizService = {
     return data.data.quiz;
   },
 
-  async submitQuiz(quiz1:any ,answer: Record<string, number>,content:string) {
-    const response = await api.post('/quiz/submit', { quiz1 ,answer ,content });
+  async submitQuiz(quiz1:any ,answer: Record<string, number>,content:string,score:number) {
+    const response = await api.post('/quiz/submit', { quiz1 ,answer ,content ,score });
     return response.data.response;
   },
 };
