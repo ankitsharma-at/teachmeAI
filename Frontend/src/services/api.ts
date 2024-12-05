@@ -15,14 +15,14 @@ export const chatService = {
     // console.log(context)
     // console.log(content)
     const response = await api.post('/chat', { question:content, context,pdfText });
-    console.log(response)
+    // console.log(response)
     return response.data.data.response;
   },
 
   async generateSummary(content: string) {
-    console.log(content)
+    // console.log(content)
     const response = await api.post('/summary', { text:content });
-    console.log(response.data.data.summary)
+    // console.log(response.data.data.summary)
     return response.data.data.summary;
   },
 };
@@ -30,7 +30,7 @@ export const chatService = {
 export const quizService = {
   async generateQuiz(content: string) {
     const {data} = await api.post('/quiz', { content ,questionCount:4 });
-    console.log(data)
+    // console.log(data)
     return data.data.quiz;
   },
 

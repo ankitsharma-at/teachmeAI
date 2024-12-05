@@ -4,23 +4,23 @@ const { AppError } = require('../utils/errorHandler');
 
 async function generateQuiz(content, questionCount) {
   try {
-    console.log("Content:", content);
+    // console.log("Content:", content);
 
     // Create the prompt
     const prompt = `${SYSTEM_PROMPTS.QUIZ}\n\nCreate ${questionCount} questions based on this content:\n${content}`;
-    console.log("Prompt:", prompt);
+    // console.log("Prompt:", prompt);
 
     // Generate content from the model
     const result = await model.generateContent(prompt);
-    console.log("Model Result:", result);
+    // console.log("Model Result:", result);
 
     // Await the response text
     let responseText = await result.response.text();
-    console.log("Response Text:", responseText);
+    // console.log("Response Text:", responseText);
 
     // Sanitize response to remove formatting characters (backticks)
     responseText = responseText.replace(/```json|```/g, '');
-    console.log("Sanitized Response Text:", responseText);
+    // console.log("Sanitized Response Text:", responseText);
 
     // Parse the sanitized JSON
     return JSON.parse(responseText);
@@ -31,15 +31,15 @@ async function generateQuiz(content, questionCount) {
 }
 async function submitQuiz(quiz , answers , content ,score){
   try {
-    console.log("Content:", quiz);
+    // console.log("Content:", quiz);
 
     // Create the prompt
     const prompt = `${SYSTEM_PROMPTS.QUIZ_SUBMIT}\n\n from the content: ${content} the  ${quiz} was taken.here are answers given by users :\n${answers} and their score was${score} `;
-    console.log("Prompt:", prompt);
+    // console.log("Prompt:", prompt);
 
     // Generate content from the model
     const result = await model.generateContent(prompt);
-    console.log("Model Result:", result);
+    // console.log("Model Result:", result);
 
     
     const response = await result.response;

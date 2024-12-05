@@ -54,7 +54,7 @@ router.post('/quiz', async (req, res, next) => {
     }
 
     let quiz = await generateQuiz(content, questionCount);
-    console.log(quiz)
+    // console.log(quiz)
     res.json({
       status: 'success',
       data: { quiz }
@@ -72,7 +72,7 @@ router.post('/quiz', async (req, res, next) => {
       }
   
       const response = await submitQuiz(quiz1, answer , content,score);
-      console.log(quiz1, answer,score)
+      // console.log(quiz1, answer,score)
       res.json({
         status: 'success',
         response 

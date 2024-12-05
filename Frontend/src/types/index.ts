@@ -6,13 +6,13 @@ export interface Message {
 }
 
 export interface Summary {
-  summary:any;
+  summary:string;
 
 }
 
 export interface ChatState {
   messages: Message[];
-  summary: Summary | null;
+  summary: string | null;
   isLoading: boolean;
   error: string | null;
 }

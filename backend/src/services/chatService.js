@@ -4,7 +4,7 @@ const { AppError } = require('../utils/errorHandler');
 
 async function generateChatResponse(question,pdfText, context) {
   try {
-    console.log(question,pdfText,context)
+    // console.log(question,pdfText,context)
     const prompt = `${SYSTEM_PROMPTS.CHAT}\n\ncontent:${pdfText} /n/nContext: ${context}\n\nQuestion: ${question}`;
     const result = await model.generateContent(prompt);
     const response = await result.response;

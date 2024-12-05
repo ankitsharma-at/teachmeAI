@@ -16,7 +16,7 @@ function Scorecard() {
   useEffect(()=>{
      async function resultQuiz(){
     result =await quizService.submitQuiz(quiz , ansArr ,pdfText , finalScore)
-    console.log(result)
+    // console.log(result)
     setResponse(result)
     
   }

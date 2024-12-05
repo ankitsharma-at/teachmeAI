@@ -1,10 +1,10 @@
 
-import { Summary } from '../types';
+
 import { FileText, LucideLightbulb } from 'lucide-react';
 import MarkdownRenderer from './MarkdownRenderer';
 
 interface ChatSummaryProps {
-  summary: Summary | null;
+  summary: string | null;
   isLoading: boolean;
   onGenerate: () => void;
 }
