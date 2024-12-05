@@ -14,7 +14,7 @@ function Chat() {
 
   useEffect(() => {
     if (!summary && !isLoading) {
-      generateSummary();
+      alert(something went wrong'')
     }
   }, [summary, isLoading, generateSummary]);
 
