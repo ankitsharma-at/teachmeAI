@@ -14,7 +14,7 @@ function Chat() {
 
   useEffect(() => {
     if (!summary && !isLoading) {
-      alert(something went wrong'')
+      alert('something went wrong')
     }
   }, [summary, isLoading, generateSummary]);
 
