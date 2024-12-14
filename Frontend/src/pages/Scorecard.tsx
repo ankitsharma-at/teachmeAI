@@ -1,4 +1,4 @@
-import { useEffect , useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Trophy, ArrowLeft, Share2 } from 'lucide-react';
 import { usePdf } from '../context/PdfContext';
@@ -8,20 +8,18 @@ import MarkdownRenderer from '../components/MarkdownRenderer';
 
 function Scorecard() {
   const navigate = useNavigate();
-  const [response , setResponse] = useState("")
-  const { finalScore,quiz , ansArr,pdfText } = usePdf();
-  let result:any;
- 
-  
-  useEffect(()=>{
-     async function resultQuiz(){
-    result =await quizService.submitQuiz(quiz , ansArr ,pdfText , finalScore)
-    // console.log(result)
-    setResponse(result)
-    
-  }
-    resultQuiz()
-  },[result])
+  const [response, setResponse] = useState('');
+  const { finalScore, quiz, ansArr, pdfText } = usePdf();
+  let result: any;
+
+  useEffect(() => {
+    async function resultQuiz() {
+      result = await quizService.submitQuiz(quiz, ansArr, pdfText, finalScore);
+      setResponse(result);
+    }
+    resultQuiz();
+  }, [result]);
+
   const getGrade = (finalScore: number) => {
     if (finalScore >= 90) return { letter: 'A', color: 'text-green-600' };
     if (finalScore >= 80) return { letter: 'B', color: 'text-blue-600' };
@@ -37,14 +35,14 @@ function Scorecard() {
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
-        className="bg-white rounded-2xl shadow-xl p-8"
+        className="bg-white dark:bg-gray-800 rounded-2xl shadow-xl p-8"
       >
         <div className="text-center mb-8">
-          <div className="inline-block p-4 bg-indigo-50 rounded-full mb-4">
-            <Trophy className="h-12 w-12 text-indigo-600" />
+          <div className="inline-block p-4 bg-indigo-50 dark:bg-indigo-600 rounded-full mb-4">
+            <Trophy className="h-12 w-12 text-indigo-600 dark:text-indigo-200" />
           </div>
-          <h1 className="text-4xl font-bold text-gray-900 mb-2">Your Results</h1>
-          <p className="text-lg text-gray-600">Here's how you performed on the quiz</p>
+          <h1 className="text-4xl font-bold text-gray-900 dark:text-gray-100 mb-2">Your Results</h1>
+          <p className="text-lg text-gray-600 dark:text-gray-300">Here's how you performed on the quiz</p>
         </div>
 
         <div className="flex justify-center mb-8">
@@ -59,33 +57,25 @@ function Scorecard() {
         </div>
 
         <div className="grid grid-cols-1 gap-6 mb-8">
-          <div className="bg-gray-50 rounded-xl p-6">
-            <h3 className="text-lg font-semibold text-gray-900 mb-2">Evaluation</h3>
-            <ul className="space-y-2 text-gray-600">
-              <MarkdownRenderer markdownText={response}/>
+          <div className="bg-gray-50 dark:bg-gray-700 rounded-xl p-6">
+            <h3 className="text-lg font-semibold text-gray-900 dark:text-gray-100 mb-2">Evaluation</h3>
+            <ul className="space-y-2 text-gray-600 dark:text-gray-300">
+              <MarkdownRenderer markdownText={response} />
             </ul>
           </div>
-          {/* <div className="bg-gray-50 rounded-xl p-6">
-            <h3 className="text-lg font-semibold text-gray-900 mb-2">Areas to Improve</h3>
-            <ul className="space-y-2 text-gray-600">
-              <li>• Review specific topics</li>
-              <li>• Practice more complex questions</li>
-              <li>• Take more practice quizzes</li>
-            </ul>
-          </div> */}
         </div>
 
         <div className="flex justify-between">
           <button
             onClick={() => navigate('/quiz')}
-            className="flex items-center px-6 py-3 bg-gray-100 text-gray-700 rounded-lg hover:bg-gray-200 transition-colors"
+            className="flex items-center px-6 py-3 bg-gray-100 dark:bg-gray-600 text-gray-700 dark:text-gray-200 rounded-lg hover:bg-gray-200 dark:hover:bg-gray-500 transition-colors"
           >
             <ArrowLeft className="h-5 w-5 mr-2" />
             Try Again
           </button>
           <button
             onClick={() => {/* Implement share functionality */}}
-            className="flex items-center px-6 py-3 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 transition-colors"
+            className="flex items-center px-6 py-3 bg-indigo-600 dark:bg-indigo-500 text-white dark:text-indigo-200 rounded-lg hover:bg-indigo-700 dark:hover:bg-indigo-400 transition-colors"
           >
             <Share2 className="h-5 w-5 mr-2" />
             Share Results

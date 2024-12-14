@@ -12,7 +12,7 @@ interface Question {
 }
 
 const Quiz: React.FC = () => {
-  const { setScore,setFinalScore, pdfText ,setQuiz, setAnsArr} = usePdf();
+  const { setScore, setFinalScore, pdfText, setQuiz, setAnsArr } = usePdf();
   const navigate = useNavigate();
 
   const [questions, setQuestions] = useState<Question[]>([]);
@@ -22,20 +22,19 @@ const Quiz: React.FC = () => {
   const [loading, setLoading] = useState(true); // Add loading state
   const [error, setError] = useState<string | null>(null); // Add error state
 
-   
   useEffect(() => {
-  
     const fetchQuiz = async () => {
-      try { 
-        if(!pdfText){
-          navigate('/')
-          alert("no pdf uploaded")
-         }else{
-        const response = await quizService.generateQuiz(pdfText);
-        setQuestions(response); 
-        setQuiz(response);
-        setLoading(false); 
-      }} catch (err) {
+      try {
+        if (!pdfText) {
+          navigate('/');
+          alert("No PDF uploaded");
+        } else {
+          const response = await quizService.generateQuiz(pdfText);
+          setQuestions(response);
+          setQuiz(response);
+          setLoading(false);
+        }
+      } catch (err) {
         setError("Failed to load quiz. Please try again.");
         setLoading(false);
       }
@@ -47,17 +46,13 @@ const Quiz: React.FC = () => {
   const handleAnswer = (answerIndex: number) => {
     const newAnswers = [...answers];
     newAnswers[currentQuestion] = answerIndex;
-     setAnswers(newAnswers);
-
-    // console.log(newAnswers)
+    setAnswers(newAnswers);
 
     if (currentQuestion < questions.length - 1) {
       setCurrentQuestion(currentQuestion + 1);
     } else {
       const finalScore = calculateScore();
       setScore(finalScore);
-      // console.log(finalScore)
-     
       setShowResults(true);
     }
   };
@@ -69,20 +64,20 @@ const Quiz: React.FC = () => {
   };
 
   const handleFinish = () => {
-    setFinalScore((calculateScore()/(questions.length))*100)
-     setAnsArr(answers)
+    setFinalScore((calculateScore() / questions.length) * 100);
+    setAnsArr(answers);
     navigate('/scorecard');
   };
 
   // Show loading indicator or error message
   if (loading) {
-    return <div className='flex h-screen w-full justify-center items-center text-3xl font-bold'>Loading quiz...</div>;
+    return <div className='flex h-screen w-full justify-center items-center text-3xl font-bold text-gray-900 dark:text-white'>Loading quiz...</div>;
   }
 
   if (error) {
-    return <div className='flex h-screen w-full justify-center items-center text-3xl font-bold'>{error}</div>;
+    return <div className='flex h-screen w-full justify-center items-center text-3xl font-bold text-red-600 dark:text-red-400'>{error}</div>;
   }
-  else{
+
   // Show quiz results
   if (showResults) {
     return (
@@ -90,15 +85,15 @@ const Quiz: React.FC = () => {
         <motion.div
           initial={{ opacity: 0, scale: 0.95 }}
           animate={{ opacity: 1, scale: 1 }}
-          className="bg-white rounded-2xl shadow-xl p-8 text-center"
+          className="bg-white dark:bg-gray-800 rounded-2xl shadow-xl p-8 text-center"
         >
-          <h2 className="text-3xl font-bold text-gray-900 mb-4">Quiz Complete!</h2>
-          <p className="text-xl text-gray-600 mb-8">
+          <h2 className="text-3xl font-bold text-gray-900 dark:text-gray-100 mb-4">Quiz Complete!</h2>
+          <p className="text-xl text-gray-600 dark:text-gray-300 mb-8">
             You scored {calculateScore()} out of {questions.length}
           </p>
           <button
             onClick={handleFinish}
-            className="bg-indigo-600 text-white px-8 py-3 rounded-lg hover:bg-indigo-700 transition-colors"
+            className="bg-indigo-600 dark:bg-indigo-700 text-white dark:text-gray-100 px-8 py-3 rounded-lg hover:bg-indigo-700 dark:hover:bg-indigo-400 transition-colors"
           >
             View Detailed Results
           </button>
@@ -113,27 +108,27 @@ const Quiz: React.FC = () => {
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
-        className="bg-white rounded-2xl shadow-xl p-8"
+        className="bg-white dark:bg-gray-800 rounded-2xl shadow-xl p-8"
       >
         <div className="mb-8">
           <div className="flex justify-between items-center mb-4">
-            <h2 className="text-2xl font-bold text-gray-900">
+            <h2 className="text-2xl font-bold text-gray-900 dark:text-gray-100">
               Question {currentQuestion + 1} of {questions.length}
             </h2>
-            <span className="text-sm text-gray-500">
+            <span className="text-sm text-gray-500 dark:text-gray-400">
               Progress: {Math.round(((currentQuestion + 1) / questions.length) * 100)}%
             </span>
           </div>
-          <div className="w-full bg-gray-200 rounded-full h-2">
+          <div className="w-full bg-gray-200 dark:bg-gray-600 rounded-full h-2">
             <div
-              className="bg-indigo-600 h-2 rounded-full transition-all duration-300"
+              className="bg-indigo-600 dark:bg-indigo-400 h-2 rounded-full transition-all duration-300"
               style={{ width: `${((currentQuestion + 1) / questions.length) * 100}%` }}
             />
           </div>
         </div>
 
         <div className="mb-8">
-          <h3 className="text-xl text-gray-800 mb-4">
+          <h3 className="text-xl text-gray-800 dark:text-gray-100 mb-4">
             {questions[currentQuestion].question}
           </h3>
           <div className="space-y-4">
@@ -141,7 +136,7 @@ const Quiz: React.FC = () => {
               <button
                 key={index}
                 onClick={() => handleAnswer(index)}
-                className="w-full text-left p-4 rounded-lg border border-gray-300 hover:border-indigo-500 hover:bg-indigo-50 transition-colors"
+                className="w-full text-left p-4 rounded-lg border dark:text-gray-200 border-gray-300 dark:border-gray-600 hover:border-gray-800 hover:bg-indigo-50 dark:hover:bg-gray-700 transition-colors"
               >
                 {option}
               </button>
@@ -152,6 +147,5 @@ const Quiz: React.FC = () => {
     </div>
   );
 };
-}
 
 export default Quiz;
