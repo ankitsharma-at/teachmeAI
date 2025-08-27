@@ -18,8 +18,8 @@ function Navbar() {
           <div className="flex space-x-8">
             <Link to="/" className="flex items-center">
               <BookOpen className="h-6 w-6 text-indigo-600 dark:text-indigo-400" />
-              <span className="ml-2 text-xl font-bold text-gray-800 dark:text-gray-100">
-                PDF Learner
+              <span className="ml-2 text-xl font-bold text-gray-800 dark:text-gray-100 hidden sm:inline">
+                TEACHME
               </span>
             </Link>
           </div>

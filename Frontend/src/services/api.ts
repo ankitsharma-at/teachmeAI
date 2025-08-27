@@ -18,9 +18,10 @@ export const chatService = {
     // console.log(response)
     return response.data.data.response;
   },
-
+   
   async generateSummary(content: string) {
-    // console.log(content)
+
+    console.log(content)
     const response = await api.post('/summary', { text:content });
     // console.log(response.data.data.summary)
     return response.data.data.summary;

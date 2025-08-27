@@ -1,4 +1,4 @@
-const pdfParse = require('pdf-parse');
+// const pdfParse = require('pdf-parse');
 const { model } = require('../config/gemini');
 const { SYSTEM_PROMPTS } = require('../utils/promptTemplates');
 const { AppError } = require('../utils/errorHandler');
@@ -14,9 +14,11 @@ async function processPdf(buffer) {
 
 async function getPdfSummary(content) {
   try {
+    // console.log(content)
     const prompt = `${SYSTEM_PROMPTS.SUMMARY}\n\n${content}`;
     const result = await model.generateContent(prompt);
-    const response = await result.response;
+    // console.log(result)
+    const response = result.response;
     return response.text();
   } catch (error) {
     throw new AppError('Failed to generate summary', 500);

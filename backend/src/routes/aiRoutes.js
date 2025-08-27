@@ -4,16 +4,17 @@ const { AppError } = require('../utils/errorHandler');
 const { generateSummary } = require('../services/summaryService');
 const { generateChatResponse } = require('../services/chatService');
 const { generateQuiz, submitQuiz } = require('../services/quizService');
+// const { getPdfSummary } = require('../services/pdfService');
 
 
 router.post('/summary', async (req, res, next) => {
   try {
     const content = req.body.text;
-    
+    // 
     if (!content) {
       throw new AppError('PDF content is required', 400);
     }
-
+    // console.log(content)
     const summary = await generateSummary(content);
     // const summary = splitSummaryString(response)
     // console.log(summary)

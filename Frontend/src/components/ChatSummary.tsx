@@ -43,7 +43,9 @@ export function ChatSummary({ summary, isLoading, onGenerate }: ChatSummaryProps
           <LucideLightbulb className="h-6 w-6 text-indigo-600 dark:text-indigo-300" />
           <h4 className="font-medium text-gray-900 dark:text-gray-100">Summary document</h4>
         </div>
-        <MarkdownRenderer markdownText={summary} />
+        <div className='  dark:text-white'>
+        <MarkdownRenderer  markdownText={summary} />
+        </div>
       </div>
     </div>
   );
